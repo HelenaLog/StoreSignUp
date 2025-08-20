@@ -1,11 +1,12 @@
 import Foundation
 
 protocol StoreViewInput: AnyObject {
-    func reloadData()
+    func set(_ state: StoreState)
 }
 
 protocol StoreViewOutput: AnyObject {
     var products: [Item] { get set }
     
     func viewDidLoad()
+    func sendRequest()
 }

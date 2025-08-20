@@ -27,6 +27,10 @@ extension StorePresenter: StoreViewOutput {
     func viewDidLoad() {
         interactor.obtainData()
     }
+    
+    func sendRequest() {
+        interactor.obtainData()
+    }
 }
 
 // MARK: - StoreInteractorOutput
@@ -34,7 +38,11 @@ extension StorePresenter: StoreViewOutput {
 extension StorePresenter: StoreInteractorOutput {
     
     func set(_ products: [Item]) {
-        self.products = products
-        view.reloadData()
+        if products.isEmpty {
+            view.set(.empty)
+        } else {
+            self.products = products
+            view.set(.success)
+        }
     }
 }

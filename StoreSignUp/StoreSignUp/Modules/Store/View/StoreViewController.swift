@@ -25,15 +25,27 @@ final class StoreViewController: UIViewController {
         return button
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.style = .large
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
+    }()
+    
+    private lazy var emptyView: EmptyView = {
+        let view = EmptyView()
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     // MARK: Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         output.viewDidLoad()
-        embedViews()
-        setupAppearance()
-        setupBehavior()
-        setupLayout()
+        setup()
     }
 }
 
@@ -41,8 +53,19 @@ final class StoreViewController: UIViewController {
 
 extension StoreViewController: StoreViewInput {
     
-    func reloadData() {
-        tableView.reloadData()
+    func set(_ state: StoreState) {
+        switch state {
+        case .success:
+            activityIndicator.stopAnimating()
+            tableView.isHidden = false
+            emptyView.isHidden = true
+            tableView.reloadData()
+        case .empty:
+            activityIndicator.stopAnimating()
+            self.output.products = []
+            emptyView.isHidden = false
+            tableView.isHidden = true
+        }
     }
 }
 
@@ -78,8 +101,22 @@ private extension StoreViewController {
         print("greetingButtonTap")
     }
     
+    func setup() {
+        embedViews()
+        setupAppearance()
+        setupBehavior()
+        setupLayout()
+        setupRefresh()
+    }
+    
+    func setupRefresh() {
+        emptyView.onRefresh = { [weak self] in
+            self?.output.sendRequest()
+        }
+    }
+    
     func setupAppearance() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
     }
     
     func setupBehavior() {
@@ -90,7 +127,9 @@ private extension StoreViewController {
     func embedViews() {
         [
             tableView,
-            greetingButton
+            greetingButton,
+            activityIndicator,
+            emptyView
         ].forEach { view.addSubview($0) }
     }
     
@@ -105,7 +144,15 @@ private extension StoreViewController {
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: greetingButton.topAnchor, constant: PointConstants.Spacing.bottom)
+            tableView.bottomAnchor.constraint(equalTo: greetingButton.topAnchor, constant: PointConstants.Spacing.bottom),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            emptyView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            emptyView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            emptyView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            emptyView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
 }
