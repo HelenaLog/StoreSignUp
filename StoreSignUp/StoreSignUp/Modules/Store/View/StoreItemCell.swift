@@ -59,7 +59,19 @@ final class StoreItemCell: UITableViewCell {
 
 extension StoreItemCell {
     
-    func configure() {}
+    func configure(with model: Item) {
+        titleLabel.text = model.title
+        priceLabel.text = String(model.price)
+        if let imageUrl = URL(string: model.image) {
+            Task {
+                if let (data, _) = try? await URLSession.shared.data(from: imageUrl) {
+                    await MainActor.run {
+                        productImageView.image = UIImage(data: data)
+                    }
+                }
+            }
+        }
+    }
 }
 
 // MARK: - Private Methods

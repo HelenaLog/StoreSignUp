@@ -3,7 +3,7 @@ import Foundation
 // MARK: - APIServiceType
 
 protocol APIServiceType {
-    func fetchProducts() async throws -> [ItemModel]
+    func fetchProducts() async throws -> [Item]
 }
 
 final class StoreAPIService {
@@ -28,7 +28,7 @@ final class StoreAPIService {
 
 extension StoreAPIService: APIServiceType {
     
-    func fetchProducts() async throws -> [ItemModel] {
+    func fetchProducts() async throws -> [Item] {
         try await request(StoreEndpoint.products)
     }
 }
@@ -45,12 +45,4 @@ private extension StoreAPIService {
         let request = NetworkRequest(url: url)
         return try await networkClient.sendRequest(request)
     }
-}
-
-struct ItemModel: Codable {
-    let id: Int
-    let title: String
-    let price: Double
-    let description: String
-    let image: String
 }

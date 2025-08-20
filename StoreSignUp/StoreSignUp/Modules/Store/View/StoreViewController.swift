@@ -2,6 +2,8 @@ import UIKit
 
 final class StoreViewController: UIViewController {
     
+    var products = [Item]()
+    
     // MARK: Private properties
     
     private lazy var tableView: UITableView = {
@@ -31,6 +33,7 @@ final class StoreViewController: UIViewController {
         setupAppearance()
         setupBehavior()
         setupLayout()
+        obtainData()
     }
 }
 
@@ -43,7 +46,7 @@ extension StoreViewController: UITableViewDelegate {}
 extension StoreViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        products.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -51,6 +54,7 @@ extension StoreViewController: UITableViewDataSource {
             withIdentifier: StoreItemCell.cellId,
             for: indexPath) as? StoreItemCell
         else { return UITableViewCell() }
+        cell.configure(with: products[indexPath.row])
         return cell
     }
 }
@@ -58,6 +62,23 @@ extension StoreViewController: UITableViewDataSource {
 // MARK: - Private Methods
 
 private extension StoreViewController {
+    
+    func obtainData() {
+        Task {
+            do {
+                let data = try await StoreAPIService().fetchProducts()
+                await MainActor.run {
+                    print(data)
+                    products = data
+                    tableView.reloadData()
+                }
+            } catch {
+                await MainActor.run {
+                    print(error)
+                }
+            }
+        }
+    }
     
     @objc
     func greetingButtonTap() {
