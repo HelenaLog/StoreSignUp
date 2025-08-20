@@ -2,7 +2,7 @@ import UIKit
 
 final class StoreViewController: UIViewController {
     
-    var products = [Item]()
+    var output: StoreViewOutput!
     
     // MARK: Private properties
     
@@ -29,11 +29,20 @@ final class StoreViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        output.viewDidLoad()
         embedViews()
         setupAppearance()
         setupBehavior()
         setupLayout()
-        obtainData()
+    }
+}
+
+// MARK: - StoreViewInput
+
+extension StoreViewController: StoreViewInput {
+    
+    func reloadData() {
+        tableView.reloadData()
     }
 }
 
@@ -46,7 +55,7 @@ extension StoreViewController: UITableViewDelegate {}
 extension StoreViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        products.count
+        output.products.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -54,7 +63,8 @@ extension StoreViewController: UITableViewDataSource {
             withIdentifier: StoreItemCell.cellId,
             for: indexPath) as? StoreItemCell
         else { return UITableViewCell() }
-        cell.configure(with: products[indexPath.row])
+        let item = output.products[indexPath.row]
+        cell.configure(with: item)
         return cell
     }
 }
@@ -62,23 +72,6 @@ extension StoreViewController: UITableViewDataSource {
 // MARK: - Private Methods
 
 private extension StoreViewController {
-    
-    func obtainData() {
-        Task {
-            do {
-                let data = try await StoreAPIService().fetchProducts()
-                await MainActor.run {
-                    print(data)
-                    products = data
-                    tableView.reloadData()
-                }
-            } catch {
-                await MainActor.run {
-                    print(error)
-                }
-            }
-        }
-    }
     
     @objc
     func greetingButtonTap() {
