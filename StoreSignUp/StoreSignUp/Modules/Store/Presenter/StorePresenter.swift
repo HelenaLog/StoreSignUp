@@ -33,6 +33,10 @@ extension StorePresenter: StoreViewOutput {
         view.set(.loading)
         interactor.obtainData()
     }
+    
+    func greetingButtonTap() {
+        router.presentGreeting()
+    }
 }
 
 // MARK: - StoreInteractorOutput

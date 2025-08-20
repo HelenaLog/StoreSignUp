@@ -89,6 +89,8 @@ extension StoreViewController: StoreViewInput {
     }
 }
 
+extension StoreViewController: TransitionHandler {}
+
 // MARK: - UITableViewDelegate
 
 extension StoreViewController: UITableViewDelegate {}
@@ -118,7 +120,7 @@ private extension StoreViewController {
     
     @objc
     func greetingButtonTap() {
-        print("greetingButtonTap")
+        output.greetingButtonTap()
     }
     
     func setup() {

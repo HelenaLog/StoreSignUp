@@ -6,7 +6,7 @@ final class StoreAssembly {
         let view = StoreViewController()
         let apiService = StoreAPIService()
         let interactor = StoreInteractor(apiService: apiService)
-        let router = StoreRouter()
+        let router = StoreRouter(transitionHandler: view)
         let presenter = StorePresenter(
             view: view,
             interactor: interactor,

@@ -9,4 +9,5 @@ protocol StoreViewOutput: AnyObject {
     
     func viewDidLoad()
     func sendRequest()
+    func greetingButtonTap()
 }
