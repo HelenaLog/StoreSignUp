@@ -45,4 +45,26 @@ extension StorePresenter: StoreInteractorOutput {
             view.set(.success)
         }
     }
+    
+    func handleError(_ error: Error) {
+        let state: StoreState
+        
+        if let apiError = error as? APIError {
+            switch apiError {
+            case .network(let err):
+                state = .error("Ошибка сети: \(err.localizedDescription)")
+            case .invalidResponse(let statusCode):
+                state = .error("Неверный ответ, код состояния: \(statusCode)")
+            case .decoding(let decodingError):
+                state = .error("Ошибка декодирования: \(decodingError.localizedDescription)")
+            case .badURL:
+                state = .error("Неверный URL")
+            }
+        } else {
+            state = .error("Неизвестная ошибка: \(error.localizedDescription)")
+        }
+        
+        view.set(state)
+    }
 }
+

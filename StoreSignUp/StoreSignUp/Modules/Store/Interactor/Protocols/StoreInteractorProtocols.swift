@@ -6,4 +6,5 @@ protocol StoreInteractorInput: AnyObject {
 
 protocol StoreInteractorOutput: AnyObject {
     func set(_ products: [Item])
+    func handleError(_ error: Error)
 }

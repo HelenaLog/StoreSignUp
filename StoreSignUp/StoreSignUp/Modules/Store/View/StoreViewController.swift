@@ -40,6 +40,13 @@ final class StoreViewController: UIViewController {
         return view
     }()
     
+    private lazy var errorView: ErrorView = {
+        let view = ErrorView()
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     // MARK: Lifecycle
 
     override func viewDidLoad() {
@@ -65,6 +72,13 @@ extension StoreViewController: StoreViewInput {
             self.output.products = []
             emptyView.isHidden = false
             tableView.isHidden = true
+        case .error(let description):
+            activityIndicator.stopAnimating()
+            self.output.products = []
+            emptyView.isHidden = true
+            errorView.isHidden = false
+            tableView.isHidden = true
+            errorView.setErrorMessage(description)
         }
     }
 }
@@ -107,10 +121,17 @@ private extension StoreViewController {
         setupBehavior()
         setupLayout()
         setupRefresh()
+        setupRetry()
     }
     
     func setupRefresh() {
         emptyView.onRefresh = { [weak self] in
+            self?.output.sendRequest()
+        }
+    }
+    
+    func setupRetry() {
+        errorView.onRetry = { [weak self] in
             self?.output.sendRequest()
         }
     }
@@ -129,7 +150,8 @@ private extension StoreViewController {
             tableView,
             greetingButton,
             activityIndicator,
-            emptyView
+            emptyView,
+            errorView
         ].forEach { view.addSubview($0) }
     }
     
@@ -153,6 +175,11 @@ private extension StoreViewController {
             emptyView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             emptyView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             emptyView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            errorView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            errorView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            errorView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            errorView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
 }

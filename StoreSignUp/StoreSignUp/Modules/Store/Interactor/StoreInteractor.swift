@@ -25,7 +25,7 @@ extension StoreInteractor: StoreInteractorInput {
                 }
             } catch {
                 await MainActor.run {
-                    print(error)
+                    output?.handleError(error)
                 }
             }
         }
