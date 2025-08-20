@@ -25,10 +25,12 @@ final class StorePresenter {
 extension StorePresenter: StoreViewOutput {
     
     func viewDidLoad() {
+        view.set(.loading)
         interactor.obtainData()
     }
     
     func sendRequest() {
+        view.set(.loading)
         interactor.obtainData()
     }
 }

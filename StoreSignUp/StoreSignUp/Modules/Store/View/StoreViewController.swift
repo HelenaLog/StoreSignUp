@@ -79,6 +79,12 @@ extension StoreViewController: StoreViewInput {
             errorView.isHidden = false
             tableView.isHidden = true
             errorView.setErrorMessage(description)
+        case .loading:
+            activityIndicator.startAnimating()
+            self.output.products = []
+            emptyView.isHidden = true
+            errorView.isHidden = true
+            tableView.isHidden = true
         }
     }
 }
