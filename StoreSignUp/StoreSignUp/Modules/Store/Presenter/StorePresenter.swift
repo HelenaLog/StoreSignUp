@@ -53,8 +53,8 @@ extension StorePresenter: StoreInteractorOutput {
         
         if let apiError = error as? APIError {
             switch apiError {
-            case .network(let err):
-                state = .error("Ошибка сети: \(err.localizedDescription)")
+            case .network(let error):
+                state = .error("Ошибка сети: \(error.localizedDescription)")
             case .invalidResponse(let statusCode):
                 state = .error("Неверный ответ, код состояния: \(statusCode)")
             case .decoding(let decodingError):
