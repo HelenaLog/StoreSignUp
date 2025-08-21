@@ -37,6 +37,20 @@
 			);
 			target = 4D8B5B5C2E56084D00E9EAEA /* StoreSignUp */;
 		};
+		4DEC117F2E57868500C12936 /* Exceptions for "StoreSignUp" folder in "StoreSignUpTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Modules/Store/Entity/Item.swift,
+				Services/Network/APIError.swift,
+				Services/Network/DefaultNetworkClient.swift,
+				Services/Network/Endpoint.swift,
+				Services/Network/HTTPMethod.swift,
+				Services/Network/NetworkRequest.swift,
+				Services/Network/StoreAPIService.swift,
+				Services/Network/StoreEndpoint.swift,
+			);
+			target = 4D8B5B722E56084E00E9EAEA /* StoreSignUpTests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -44,6 +58,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				4D8B5B852E56084E00E9EAEA /* Exceptions for "StoreSignUp" folder in "StoreSignUp" target */,
+				4DEC117F2E57868500C12936 /* Exceptions for "StoreSignUp" folder in "StoreSignUpTests" target */,
 			);
 			path = StoreSignUp;
 			sourceTree = "<group>";
