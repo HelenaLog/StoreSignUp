@@ -2,6 +2,8 @@ import UIKit
 
 final class GreetingViewController: UIViewController {
     
+    var output: GreetingViewOutput?
+    
     // MARK: Private Properties
     
     private lazy var greetingLabel: UILabel = {
@@ -20,9 +22,23 @@ final class GreetingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        output?.viewDidLoad()
         setupAppearance()
         embedView()
         setupLayout()
+    }
+}
+
+// MARK: - GreetingViewInput
+
+extension GreetingViewController: GreetingViewInput {
+    
+    func showGreeting(_ text: String) {
+        greetingLabel.text = text
+    }
+    
+    func showError(_ error: String) {
+        greetingLabel.text = error
     }
 }
 
