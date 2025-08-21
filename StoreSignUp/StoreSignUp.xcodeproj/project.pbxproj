@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4DF8AD552E57A2BC00B4EF6D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4DF8AD542E57A2BC00B4EF6D /* Kingfisher */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		4D8B5B742E56084E00E9EAEA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -70,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DF8AD552E57A2BC00B4EF6D /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +126,7 @@
 			);
 			name = StoreSignUp;
 			packageProductDependencies = (
+				4DF8AD542E57A2BC00B4EF6D /* Kingfisher */,
 			);
 			productName = StoreSignUp;
 			productReference = 4D8B5B5D2E56084D00E9EAEA /* StoreSignUp.app */;
@@ -177,6 +183,9 @@
 			);
 			mainGroup = 4D8B5B542E56084D00E9EAEA;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				4DF8AD532E57A2BC00B4EF6D /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4D8B5B5E2E56084D00E9EAEA /* Products */;
 			projectDirPath = "";
@@ -487,6 +496,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4DF8AD532E57A2BC00B4EF6D /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4DF8AD542E57A2BC00B4EF6D /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4DF8AD532E57A2BC00B4EF6D /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4D8B5B552E56084D00E9EAEA /* Project object */;
 }
