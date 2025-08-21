@@ -7,35 +7,36 @@ protocol StorageServiceType {
     func setRegistered(_ value: Bool)
 }
 
-enum StorageError: Error {
-    case saveFailure
-    case invalidData
-    case nameNotFound
-}
-
-final class StorageService: StorageServiceType {
+final class StorageService {
+    
+    // MARK: Private Properties
     
     private let userDefaults = UserDefaults.standard
+}
+
+// MARK: - StorageServiceType
+
+extension StorageService: StorageServiceType {
     
     func saveUser(name: String) throws {
         guard !name.isEmpty else {
             throw StorageError.invalidData
         }
-        userDefaults.set(name, forKey: "username")
+        userDefaults.set(name, forKey: StorageKey.username.rawValue)
     }
     
     func getUserName() throws -> String {
-        guard let name = userDefaults.string(forKey: "username"), !name.isEmpty else {
+        guard let name = userDefaults.string(forKey: StorageKey.username.rawValue), !name.isEmpty else {
             throw StorageError.nameNotFound
         }
         return name
     }
     
     func isRegistered() -> Bool {
-        userDefaults.bool(forKey: "isRegistered")
+        userDefaults.bool(forKey: StorageKey.isRegistered.rawValue)
     }
     
     func setRegistered(_ value: Bool) {
-        userDefaults.set(value, forKey: "isRegistered")
+        userDefaults.set(value, forKey: StorageKey.isRegistered.rawValue)
     }
 }

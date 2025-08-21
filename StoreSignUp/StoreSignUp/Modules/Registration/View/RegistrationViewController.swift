@@ -2,7 +2,7 @@ import UIKit
 
 final class RegistrationViewController: UIViewController {
     
-    var output: RegistrationViewOutput?
+    var output: RegistrationViewOutput!
     
     // MARK: Private Properties
     
@@ -158,12 +158,7 @@ final class RegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         output?.viewDidLoad()
-        embedViews()
-        setupLayout()
-        setupAppearance()
-        setupBehavior()
-        setupTapGestureRecognizer()
-        addKeyboardObservers()
+        setup()
     }
     
     // MARK: Deinit
@@ -218,6 +213,8 @@ extension RegistrationViewController: RegistrationViewInput {
     }
 }
 
+// MARK: - TransitionHandler
+
 extension RegistrationViewController: TransitionHandler {}
 
 // MARK: - Private Methods
@@ -238,12 +235,12 @@ private extension RegistrationViewController {
     
     @objc
     func registrationButtonTapped() {
-        output?.registrationButtonTapped(name: nameTextField.text ?? String())
+        output.registrationButtonTapped(name: nameTextField.text ?? String())
     }
     
     @objc
     func textFieldDidChange() {
-        output?.regButton(
+        output.validateData(
             name: nameTextField.text ?? String(),
             surname: surnameTextField.text ?? String(),
             birthDate: dateFormatter.date(from: birthDateTextField.text ?? String()) ?? Date(),
@@ -267,6 +264,15 @@ private extension RegistrationViewController {
 // MARK: - UI Configuration
 
 private extension RegistrationViewController {
+    
+    func setup() {
+        embedViews()
+        setupLayout()
+        setupAppearance()
+        setupBehavior()
+        setupTapGestureRecognizer()
+        addKeyboardObservers()
+    }
     
     func setupTapGestureRecognizer() {
         let tapGestureRecognizer = UITapGestureRecognizer()

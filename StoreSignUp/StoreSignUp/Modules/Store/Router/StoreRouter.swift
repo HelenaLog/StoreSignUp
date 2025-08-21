@@ -5,7 +5,12 @@ protocol StoreRouterInput: AnyObject {
 }
 
 final class StoreRouter {
-    private unowned var transitionHandler: TransitionHandler
+    
+    // MARK: Public Properties
+    
+    weak var transitionHandler: TransitionHandler?
+    
+    // MARK: Init
     
     init(transitionHandler: TransitionHandler) {
         self.transitionHandler = transitionHandler
@@ -17,6 +22,6 @@ final class StoreRouter {
 extension StoreRouter: StoreRouterInput {
     func presentGreeting() {
         let view = GreetingAssembly.assembly()
-        transitionHandler.present(with: view, animated: true)
+        transitionHandler?.present(with: view, animated: true)
     }
 }

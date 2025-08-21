@@ -2,7 +2,12 @@ import Foundation
 
 final class StoreInteractor {
     
+    // MARK: Public Properties
+    
     weak var output: StoreInteractorOutput?
+    
+    // MARK: Private Properties
+    
     private let apiService: APIServiceType
     
     // MARK: Init

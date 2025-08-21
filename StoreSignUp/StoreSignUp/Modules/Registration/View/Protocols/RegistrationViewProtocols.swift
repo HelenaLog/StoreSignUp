@@ -7,7 +7,7 @@ protocol RegistrationViewInput: AnyObject {
 protocol RegistrationViewOutput: AnyObject {
     func viewDidLoad()
     func registrationButtonTapped(name: String)
-    func regButton(
+    func validateData(
         name: String,
         surname: String,
         birthDate: Date,

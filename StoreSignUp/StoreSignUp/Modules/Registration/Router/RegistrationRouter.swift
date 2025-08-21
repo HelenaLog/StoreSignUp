@@ -5,7 +5,12 @@ protocol RegistrationRouterInput {
 }
 
 final class RegistrationRouter {
-    private unowned var transitionHandler: TransitionHandler
+    
+    // MARK: Public Properties
+    
+    weak var transitionHandler: TransitionHandler?
+    
+    // MARK: Init
     
     init(transitionHandler: TransitionHandler) {
         self.transitionHandler = transitionHandler
@@ -18,6 +23,6 @@ extension RegistrationRouter: RegistrationRouterInput {
     
     func showStoreModule() {
         let view = StoreAssembly.assembly()
-        transitionHandler.push(with: view, animated: true)
+        transitionHandler?.push(with: view, animated: true)
     }
 }

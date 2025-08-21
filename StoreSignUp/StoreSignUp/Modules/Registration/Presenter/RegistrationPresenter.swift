@@ -2,7 +2,12 @@ import Foundation
 
 final class RegistrationPresenter {
     
-    private unowned var view: RegistrationViewInput
+    // MARK: Public Properties
+    
+    weak var view: RegistrationViewInput?
+    
+    // MARK: Private Properties
+    
     private let interactor: RegistrationInteractorInput
     private let router: RegistrationRouterInput
     
@@ -24,7 +29,7 @@ final class RegistrationPresenter {
 extension RegistrationPresenter: RegistrationViewOutput {
     
     func viewDidLoad() {
-        view.set(.initial)
+        view?.set(.initial)
         interactor.checkSession()
     }
     
@@ -33,7 +38,7 @@ extension RegistrationPresenter: RegistrationViewOutput {
         router.showStoreModule()
     }
     
-    func regButton(
+    func validateData(
         name: String,
         surname: String,
         birthDate: Date,
@@ -56,9 +61,9 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
     
     func setResult(_ errors: [String]) {
         if let firstError = errors.first {
-            view.set(.invalid([firstError]))
+            view?.set(.invalid([firstError]))
         } else {
-            view.set(.valid)
+            view?.set(.valid)
         }
     }
     
@@ -76,14 +81,14 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
         } else {
             state = .error("Неизвестная ошибка: \(error.localizedDescription)")
         }
-        view.set(state)
+        view?.set(state)
     }
     
     func setSessionStatus(_ isRegistered: Bool) {
         if isRegistered {
             router.showStoreModule()
         } else {
-            view.set(.initial)
+            view?.set(.initial)
         }
     }
 }

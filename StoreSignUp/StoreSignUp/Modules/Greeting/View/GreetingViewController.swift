@@ -2,13 +2,12 @@ import UIKit
 
 final class GreetingViewController: UIViewController {
     
-    var output: GreetingViewOutput?
+    var output: GreetingViewOutput!
     
     // MARK: Private Properties
     
     private lazy var greetingLabel: UILabel = {
         let label = UILabel()
-        label.text = StringConstants.greeting
         label.textColor = .systemPink
         label.textColor = .label
         label.numberOfLines = .zero
@@ -22,7 +21,7 @@ final class GreetingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        output?.viewDidLoad()
+        output.viewDidLoad()
         setupAppearance()
         embedView()
         setupLayout()
@@ -75,11 +74,5 @@ private extension GreetingViewController {
         enum Font {
             static let size: CGFloat = 18
         }
-    }
-    
-    // MARK: StringConstants
-    
-    enum StringConstants {
-        static let greeting = "Привет"
     }
 }

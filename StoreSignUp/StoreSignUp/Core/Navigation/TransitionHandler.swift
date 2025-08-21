@@ -1,6 +1,7 @@
 import UIKit
 
 protocol TransitionHandler: AnyObject {
+    
     func present(
         with viewController: UIViewController,
         animated: Bool

@@ -156,7 +156,7 @@ private extension StoreViewController {
     
     func setupNavigationBar() {
         navigationItem.setHidesBackButton(true, animated: false)
-        navigationItem.title = "Store"
+        navigationItem.title = StringConstants.Title.store
     }
     
     func embedViews() {
@@ -231,6 +231,10 @@ private extension StoreViewController {
     // MARK: StringConstants
     
     enum StringConstants {
+        
+        enum Title {
+            static let store = "Store"
+        }
         
         // MARK: Button
         

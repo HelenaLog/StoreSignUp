@@ -2,7 +2,12 @@ import Foundation
 
 final class RegistrationInteractor {
     
+    // MARK: Public Properties
+    
     weak var output: RegistrationInteractorOutput?
+    
+    // MARK: Private Properties
+    
     private let validator: ValidatorType
     private let storageService: StorageServiceType
     
@@ -54,7 +59,3 @@ extension RegistrationInteractor: RegistrationInteractorInput {
         output?.setSessionStatus(isRegistered)
     }
 }
-
-// MARK: - Private Methods
-
-private extension RegistrationInteractor {}

@@ -2,10 +2,15 @@ import Foundation
 
 final class StorePresenter {
     
-    private unowned var view: StoreViewInput
+    // MARK: Public Properties
+    
+    weak var view: StoreViewInput?
+    var products = [Item]()
+    
+    // MARK: Private Properties
+    
     private let interactor: StoreInteractorInput
     private let router: StoreRouterInput
-    var products = [Item]()
     
     // MARK: Init
     
@@ -25,12 +30,12 @@ final class StorePresenter {
 extension StorePresenter: StoreViewOutput {
     
     func viewDidLoad() {
-        view.set(.loading)
+        view?.set(.loading)
         interactor.obtainData()
     }
     
     func sendRequest() {
-        view.set(.loading)
+        view?.set(.loading)
         interactor.obtainData()
     }
     
@@ -45,10 +50,10 @@ extension StorePresenter: StoreInteractorOutput {
     
     func set(_ products: [Item]) {
         if products.isEmpty {
-            view.set(.empty)
+            view?.set(.empty)
         } else {
             self.products = products
-            view.set(.success)
+            view?.set(.success)
         }
     }
     
@@ -65,12 +70,13 @@ extension StorePresenter: StoreInteractorOutput {
                 state = .error("Ошибка декодирования: \(decodingError.localizedDescription)")
             case .badURL:
                 state = .error("Неверный URL")
+            case .invalidBaseURL:
+                state = .error("Неверный Base URL")
             }
         } else {
             state = .error("Неизвестная ошибка: \(error.localizedDescription)")
         }
         
-        view.set(state)
+        view?.set(state)
     }
 }
-

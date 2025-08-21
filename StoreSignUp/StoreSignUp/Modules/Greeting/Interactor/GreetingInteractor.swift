@@ -2,7 +2,12 @@ import Foundation
 
 final class GreetingInteractor {
     
+    // MARK: Public Properties
+    
     weak var output: GreetingInteractorOutput?
+    
+    // MARK: Private Properties
+    
     private let storageService: StorageServiceType
     
     // MARK: Init

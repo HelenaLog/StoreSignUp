@@ -161,7 +161,7 @@ private extension ErrorView {
         
         enum Title {
             static let title = "Что-то пошло не так"
-            static let message = "Мы столкнулись с неожиданной ошибкой. Пожалуйста, попробуйте снова."
+            static let message = "Мы столкнулись с неожиданной ошибкой. Пожалуйста, попробуйте снова"
         }
         
         enum Icon {

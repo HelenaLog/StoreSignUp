@@ -2,7 +2,12 @@ import Foundation
 
 final class GreetingPresenter {
     
-    private unowned var view: GreetingViewInput
+    // MARK: Public Properties
+    
+    weak var view: GreetingViewInput?
+    
+    // MARK: Private Properties
+    
     private let interactor: GreetingInteractorInput
     
     // MARK: Init
@@ -30,10 +35,10 @@ extension GreetingPresenter: GreetingViewOutput {
 extension GreetingPresenter: GreetingInteractorOutput {
     func set(_ name: String) {
         let greeting = "Привет, \(name)!"
-        view.showGreeting(greeting)
+        view?.showGreeting(greeting)
     }
     
     func handleError(_ error: Error) {
-        view.showError("Не удалось загрузить имя: \(error.localizedDescription)")
+        view?.showError("Не удалось загрузить имя: \(error.localizedDescription)")
     }
 }
