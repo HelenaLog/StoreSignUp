@@ -1,6 +1,9 @@
 import UIKit
+import Kingfisher
 
 final class StoreItemCell: UITableViewCell {
+    
+    // MARK: Static properties
     
     static let cellId = StringConstants.id
     
@@ -62,14 +65,14 @@ extension StoreItemCell {
     func configure(with model: Item) {
         titleLabel.text = model.title
         priceLabel.text = String(model.price)
-        if let imageUrl = URL(string: model.image) {
-            Task {
-                if let (data, _) = try? await URLSession.shared.data(from: imageUrl) {
-                    await MainActor.run {
-                        productImageView.image = UIImage(data: data)
-                    }
-                }
-            }
+        if let image = URL(string: model.image) {
+            productImageView.kf.setImage(
+                with: image,
+                placeholder: UIImage(systemName: StringConstants.imagePlaceholder),
+                options: [.transition(.fade(0.3)), .cacheOriginalImage]
+            )
+        } else {
+            productImageView.image = UIImage(systemName: StringConstants.imagePlaceholder)
         }
     }
 }
@@ -139,5 +142,6 @@ private extension StoreItemCell {
     
     enum StringConstants {
         static let id = "ItemTableViewCell"
+        static let imagePlaceholder = "photo"
     }
 }
