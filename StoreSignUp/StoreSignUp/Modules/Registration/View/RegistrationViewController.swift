@@ -272,6 +272,12 @@ private extension RegistrationViewController {
         setupBehavior()
         setupTapGestureRecognizer()
         addKeyboardObservers()
+        setupDatePicker()
+    }
+    
+    func setupDatePicker() {
+        datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: -15, to: Date())
+        datePicker.minimumDate = Calendar.current.date(byAdding: .year, value: -100, to: Date())
     }
     
     func setupTapGestureRecognizer() {
