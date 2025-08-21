@@ -17,5 +17,4 @@ final class RegistrationAssembly {
         interactor.output = presenter
         return view
     }
-    
 }
