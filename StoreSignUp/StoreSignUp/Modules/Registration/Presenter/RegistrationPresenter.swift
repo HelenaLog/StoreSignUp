@@ -22,12 +22,12 @@ final class RegistrationPresenter {
 // MARK: - RegistrationViewOutput
 
 extension RegistrationPresenter: RegistrationViewOutput {
-
+    
     func viewDidLoad() {
         view.set(.initial)
         interactor.checkSession()
     }
-
+    
     func registrationButtonTapped(name: String) {
         interactor.saveData(name: name)
         router.showStoreModule()

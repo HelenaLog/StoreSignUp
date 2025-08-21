@@ -211,12 +211,8 @@ extension RegistrationViewController: RegistrationViewInput {
         case .invalid(let errors):
             registrationButton.isEnabled = false
             errorLabel.text = errors.first
-            print(errors)
-        case .loading:
-            print("loading")
-        case .success:
-            print("success")
         case .error(let error):
+            registrationButton.isEnabled = false
             errorLabel.text = error
         }
     }
@@ -247,7 +243,6 @@ private extension RegistrationViewController {
     
     @objc
     func textFieldDidChange() {
-        print("textFieldDidChange")
         output?.regButton(
             name: nameTextField.text ?? String(),
             surname: surnameTextField.text ?? String(),
@@ -296,6 +291,7 @@ private extension RegistrationViewController {
     
     func setupAppearance() {
         view.backgroundColor = .white
+        navigationItem.title = StringConstants.Title.signUp
     }
     
     func embedViews() {
@@ -339,7 +335,7 @@ private extension RegistrationViewController {
             stackView.leadingAnchor.constraint(equalTo: scrollFrameGuide.leadingAnchor, constant: PointConstants.Spacing.leading),
             stackView.trailingAnchor.constraint(equalTo: scrollFrameGuide.trailingAnchor, constant: PointConstants.Spacing.trailing),
             stackView.bottomAnchor.constraint(equalTo: scrollContentGuide.bottomAnchor, constant: PointConstants.Spacing.bottom),
-            registrationButton.heightAnchor.constraint(equalToConstant: PointConstants.Button.height),
+            registrationButton.heightAnchor.constraint(equalToConstant: PointConstants.Button.height)
         ])
     }
 }
@@ -374,6 +370,9 @@ private extension RegistrationViewController {
     
     enum StringConstants {
         
+        enum Title {
+            static let signUp = "SignUp"
+        }
         // MARK: Placeholder
         
         enum Placeholder {

@@ -4,7 +4,7 @@ final class StorePresenter {
     
     private unowned var view: StoreViewInput
     private let interactor: StoreInteractorInput
-    private let router: StoreRouter
+    private let router: StoreRouterInput
     var products = [Item]()
     
     // MARK: Init

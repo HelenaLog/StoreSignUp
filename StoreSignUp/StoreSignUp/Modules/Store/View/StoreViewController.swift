@@ -130,6 +130,7 @@ private extension StoreViewController {
         setupLayout()
         setupRefresh()
         setupRetry()
+        setupNavigationBar()
     }
     
     func setupRefresh() {
@@ -151,6 +152,11 @@ private extension StoreViewController {
     func setupBehavior() {
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    func setupNavigationBar() {
+        navigationItem.setHidesBackButton(true, animated: false)
+        navigationItem.title = "Store"
     }
     
     func embedViews() {
