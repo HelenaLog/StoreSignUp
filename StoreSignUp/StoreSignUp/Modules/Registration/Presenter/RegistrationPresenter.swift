@@ -70,6 +70,8 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
                 state = .error("Не удалось сохранить данные пользователя")
             case .invalidData:
                 state = .error("Неверные данные для сохранения")
+            case .nameNotFound:
+                state = .error("Имя не найдено")
             }
         } else {
             state = .error("Неизвестная ошибка: \(error.localizedDescription)")

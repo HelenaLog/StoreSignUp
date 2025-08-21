@@ -1,7 +1,7 @@
 import UIKit
 
 protocol StoreRouterInput: AnyObject {
-    func presentGreeting() -> UIViewController
+    func presentGreeting()
 }
 
 final class StoreRouter {
@@ -15,9 +15,8 @@ final class StoreRouter {
 // MARK: - StoreRouterInput
 
 extension StoreRouter: StoreRouterInput {
-    func presentGreeting() -> UIViewController {
-        let view = UIViewController()
+    func presentGreeting() {
+        let view = GreetingAssembly.assembly()
         transitionHandler.present(with: view, animated: true)
-        return view
     }
 }
