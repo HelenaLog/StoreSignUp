@@ -14,19 +14,11 @@
 			remoteGlobalIDString = 4D8B5B5C2E56084D00E9EAEA;
 			remoteInfo = StoreSignUp;
 		};
-		4D8B5B7E2E56084E00E9EAEA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4D8B5B552E56084D00E9EAEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4D8B5B5C2E56084D00E9EAEA;
-			remoteInfo = StoreSignUp;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		4D8B5B5D2E56084D00E9EAEA /* StoreSignUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoreSignUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D8B5B732E56084E00E9EAEA /* StoreSignUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StoreSignUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D8B5B7D2E56084E00E9EAEA /* StoreSignUpUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StoreSignUpUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -48,6 +40,9 @@
 				Services/Network/NetworkRequest.swift,
 				Services/Network/StoreAPIService.swift,
 				Services/Network/StoreEndpoint.swift,
+				Services/Storage/StorageError.swift,
+				Services/Storage/StorageService.swift,
+				Services/Validator/Validator.swift,
 			);
 			target = 4D8B5B722E56084E00E9EAEA /* StoreSignUpTests */;
 		};
@@ -68,11 +63,6 @@
 			path = StoreSignUpTests;
 			sourceTree = "<group>";
 		};
-		4D8B5B802E56084E00E9EAEA /* StoreSignUpUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = StoreSignUpUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,13 +80,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4D8B5B7A2E56084E00E9EAEA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -105,7 +88,6 @@
 			children = (
 				4D8B5B5F2E56084D00E9EAEA /* StoreSignUp */,
 				4D8B5B762E56084E00E9EAEA /* StoreSignUpTests */,
-				4D8B5B802E56084E00E9EAEA /* StoreSignUpUITests */,
 				4D8B5B5E2E56084D00E9EAEA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -115,7 +97,6 @@
 			children = (
 				4D8B5B5D2E56084D00E9EAEA /* StoreSignUp.app */,
 				4D8B5B732E56084E00E9EAEA /* StoreSignUpTests.xctest */,
-				4D8B5B7D2E56084E00E9EAEA /* StoreSignUpUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -168,29 +149,6 @@
 			productReference = 4D8B5B732E56084E00E9EAEA /* StoreSignUpTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		4D8B5B7C2E56084E00E9EAEA /* StoreSignUpUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4D8B5B8E2E56084E00E9EAEA /* Build configuration list for PBXNativeTarget "StoreSignUpUITests" */;
-			buildPhases = (
-				4D8B5B792E56084E00E9EAEA /* Sources */,
-				4D8B5B7A2E56084E00E9EAEA /* Frameworks */,
-				4D8B5B7B2E56084E00E9EAEA /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				4D8B5B7F2E56084E00E9EAEA /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				4D8B5B802E56084E00E9EAEA /* StoreSignUpUITests */,
-			);
-			name = StoreSignUpUITests;
-			packageProductDependencies = (
-			);
-			productName = StoreSignUpUITests;
-			productReference = 4D8B5B7D2E56084E00E9EAEA /* StoreSignUpUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -205,10 +163,6 @@
 						CreatedOnToolsVersion = 16.2;
 					};
 					4D8B5B722E56084E00E9EAEA = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 4D8B5B5C2E56084D00E9EAEA;
-					};
-					4D8B5B7C2E56084E00E9EAEA = {
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = 4D8B5B5C2E56084D00E9EAEA;
 					};
@@ -230,7 +184,6 @@
 			targets = (
 				4D8B5B5C2E56084D00E9EAEA /* StoreSignUp */,
 				4D8B5B722E56084E00E9EAEA /* StoreSignUpTests */,
-				4D8B5B7C2E56084E00E9EAEA /* StoreSignUpUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -244,13 +197,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		4D8B5B712E56084E00E9EAEA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4D8B5B7B2E56084E00E9EAEA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -274,13 +220,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4D8B5B792E56084E00E9EAEA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -288,11 +227,6 @@
 			isa = PBXTargetDependency;
 			target = 4D8B5B5C2E56084D00E9EAEA /* StoreSignUp */;
 			targetProxy = 4D8B5B742E56084E00E9EAEA /* PBXContainerItemProxy */;
-		};
-		4D8B5B7F2E56084E00E9EAEA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4D8B5B5C2E56084D00E9EAEA /* StoreSignUp */;
-			targetProxy = 4D8B5B7E2E56084E00E9EAEA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -522,48 +456,6 @@
 			};
 			name = Release;
 		};
-		4D8B5B8F2E56084E00E9EAEA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hello.StoreSignUpUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = StoreSignUp;
-			};
-			name = Debug;
-		};
-		4D8B5B902E56084E00E9EAEA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hello.StoreSignUpUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = StoreSignUp;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -590,15 +482,6 @@
 			buildConfigurations = (
 				4D8B5B8C2E56084E00E9EAEA /* Debug */,
 				4D8B5B8D2E56084E00E9EAEA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		4D8B5B8E2E56084E00E9EAEA /* Build configuration list for PBXNativeTarget "StoreSignUpUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4D8B5B8F2E56084E00E9EAEA /* Debug */,
-				4D8B5B902E56084E00E9EAEA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
