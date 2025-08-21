@@ -2,6 +2,8 @@ import UIKit
 
 final class RegistrationViewController: UIViewController {
     
+    var output: RegistrationViewOutput?
+    
     // MARK: Private Properties
     
     private lazy var dateFormatter: DateFormatter = {
@@ -193,6 +195,28 @@ extension RegistrationViewController: UITextFieldDelegate {
     }
 }
 
+// MARK: - RegistrationViewInput
+
+extension RegistrationViewController: RegistrationViewInput {
+    
+    func set(_ state: RegistrationState) {
+        switch state {
+        case .initial:
+            print("initial")
+        case .valid:
+            print("valid")
+        case .invalid(let errors):
+            print(errors)
+        case .loading:
+            print("loading")
+        case .success:
+            print("success")
+        case .error(let error):
+            print("\(error)")
+        }
+    }
+}
+
 // MARK: - Private Methods
 
 private extension RegistrationViewController {
@@ -212,6 +236,7 @@ private extension RegistrationViewController {
     @objc
     func registrationButtonTapped() {
         print("registrationButtonTapped")
+        output?.registrationButtonTapped(name: nameTextField.text ?? String())
     }
     
     @objc
