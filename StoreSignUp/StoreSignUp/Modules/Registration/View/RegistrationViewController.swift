@@ -7,4 +7,3 @@ final class RegistrationViewController: UIViewController {
         view.backgroundColor = .green
     }
 }
-
