@@ -5,5 +5,14 @@ protocol RegistrationViewInput: AnyObject {
 }
 
 protocol RegistrationViewOutput: AnyObject {
+    func viewDidLoad()
     func registrationButtonTapped(name: String)
+    func regButton(
+        name: String,
+        surname: String,
+        birthDate: Date,
+        password: String,
+        repeatPassword: String
+    )
+    func showStoreModule()
 }

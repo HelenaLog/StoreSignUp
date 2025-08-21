@@ -157,6 +157,7 @@ final class RegistrationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        output?.viewDidLoad()
         embedViews()
         setupLayout()
         setupAppearance()
@@ -202,17 +203,23 @@ extension RegistrationViewController: RegistrationViewInput {
     func set(_ state: RegistrationState) {
         switch state {
         case .initial:
-            print("initial")
+            registrationButton.isEnabled = false
+            errorLabel.text = nil
         case .valid:
-            print("valid")
+            registrationButton.isEnabled = true
+            errorLabel.text = nil
+            // router -> store screen
+            print("Data Valid")
         case .invalid(let errors):
+            registrationButton.isEnabled = false
+            errorLabel.text = errors.first
             print(errors)
         case .loading:
             print("loading")
         case .success:
             print("success")
         case .error(let error):
-            print("\(error)")
+            errorLabel.text = error
         }
     }
 }
@@ -242,6 +249,13 @@ private extension RegistrationViewController {
     @objc
     func textFieldDidChange() {
         print("textFieldDidChange")
+        output?.regButton(
+            name: nameTextField.text ?? String(),
+            surname: surnameTextField.text ?? String(),
+            birthDate: dateFormatter.date(from: birthDateTextField.text ?? String()) ?? Date(),
+            password: passwordTextField.text ?? String(),
+            repeatPassword: repeatPasswordTextField.text ?? String()
+        )
     }
     
     @objc

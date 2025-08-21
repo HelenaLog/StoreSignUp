@@ -8,4 +8,6 @@ protocol RegistrationInteractorInput: AnyObject {
 
 protocol RegistrationInteractorOutput: AnyObject {
     func setResult(_ errors: [String])
+    func handleError(_ error: Error)
+    func setSessionStatus(_ isRegistered: Bool)
 }

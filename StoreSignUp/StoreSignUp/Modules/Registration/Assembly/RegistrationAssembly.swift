@@ -5,7 +5,8 @@ final class RegistrationAssembly {
     static func assembly() -> UIViewController {
         let view = RegistrationViewController()
         let validator = RegistrationValidator()
-        let interactor = RegistrationInteractor(validator: validator)
+        let storageService = StorageService()
+        let interactor = RegistrationInteractor(validator: validator, storageService: storageService)
         let router = RegistrationRouter()
         let presenter = RegistrationPresenter(
             view: view,

@@ -4,9 +4,16 @@ final class RegistrationInteractor {
     
     weak var output: RegistrationInteractorOutput?
     private let validator: ValidatorType
+    private let storageService: StorageServiceType
     
-    init(validator: ValidatorType) {
+    // MARK: Init
+    
+    init(
+        validator: ValidatorType,
+        storageService: StorageServiceType
+    ) {
         self.validator = validator
+        self.storageService = storageService
     }
 }
 
@@ -33,11 +40,18 @@ extension RegistrationInteractor: RegistrationInteractorInput {
     }
     
     func saveData(name: String) {
-        print("saveData")
+        do {
+            try storageService.saveUser(name: name)
+            storageService.setRegistered(true)
+            output?.setResult([])
+        } catch {
+            output?.handleError(error)
+        }
     }
     
     func checkSession() {
-        print("checkSession")
+        let isRegistered = storageService.isRegistered()
+        output?.setSessionStatus(isRegistered)
     }
 }
 

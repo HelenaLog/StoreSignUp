@@ -24,31 +24,30 @@ final class RegistrationValidator: ValidatorType {
         password: String,
         repeatPassword: String
     ) -> [String] {
-        var errors: [String] = []
         
         if name.isEmpty || name.range(of: Regex.name.rawValue, options: .regularExpression) == nil {
-            errors.append(StringConstants.Error.invalidName)
+            return [StringConstants.Error.invalidName]
         }
         
         if surname.isEmpty || surname.range(of: Regex.name.rawValue, options: .regularExpression) == nil {
-            errors.append(StringConstants.Error.invalidSurname)
+            return [StringConstants.Error.invalidSurname]
         }
         
         let calendar = Calendar.current
         let ageComponents = calendar.dateComponents([.year], from: birthDate, to: Date())
         if ageComponents.year == nil || ageComponents.year! < 15 {
-            errors.append(StringConstants.Error.invalidAge)
+            return [StringConstants.Error.invalidAge]
         }
         
         if password.range(of: Regex.password.rawValue, options: .regularExpression) == nil {
-            errors.append(StringConstants.Error.invalidPassword)
+            return [StringConstants.Error.invalidPassword]
         }
         
         if repeatPassword != password {
-            errors.append(StringConstants.Error.passwordMismatch)
+            return [StringConstants.Error.passwordMismatch]
         }
         
-        return errors
+        return []
     }
 }
 
