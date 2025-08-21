@@ -6,6 +6,11 @@ protocol TransitionHandler: AnyObject {
         animated: Bool
     )
     
+    func push(
+        with viewController: UIViewController,
+        animated: Bool
+    )
+    
     func dismiss()
 }
 
@@ -16,6 +21,13 @@ extension TransitionHandler where Self: UIViewController {
         animated: Bool = true
     ) {
         present(viewController, animated: animated)
+    }
+    
+    func push(
+        with viewController: UIViewController,
+        animated: Bool = true
+    ) {
+        navigationController?.pushViewController(viewController, animated: animated)
     }
     
     func dismiss() {

@@ -208,8 +208,6 @@ extension RegistrationViewController: RegistrationViewInput {
         case .valid:
             registrationButton.isEnabled = true
             errorLabel.text = nil
-            // router -> store screen
-            print("Data Valid")
         case .invalid(let errors):
             registrationButton.isEnabled = false
             errorLabel.text = errors.first
@@ -223,6 +221,8 @@ extension RegistrationViewController: RegistrationViewInput {
         }
     }
 }
+
+extension RegistrationViewController: TransitionHandler {}
 
 // MARK: - Private Methods
 
@@ -242,7 +242,6 @@ private extension RegistrationViewController {
     
     @objc
     func registrationButtonTapped() {
-        print("registrationButtonTapped")
         output?.registrationButtonTapped(name: nameTextField.text ?? String())
     }
     

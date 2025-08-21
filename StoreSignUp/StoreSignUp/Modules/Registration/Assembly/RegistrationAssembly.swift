@@ -7,7 +7,7 @@ final class RegistrationAssembly {
         let validator = RegistrationValidator()
         let storageService = StorageService()
         let interactor = RegistrationInteractor(validator: validator, storageService: storageService)
-        let router = RegistrationRouter()
+        let router = RegistrationRouter(transitionHandler: view)
         let presenter = RegistrationPresenter(
             view: view,
             interactor: interactor,

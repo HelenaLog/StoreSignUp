@@ -14,5 +14,4 @@ protocol RegistrationViewOutput: AnyObject {
         password: String,
         repeatPassword: String
     )
-    func showStoreModule()
 }

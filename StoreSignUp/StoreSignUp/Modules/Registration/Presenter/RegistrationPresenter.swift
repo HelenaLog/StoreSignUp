@@ -4,7 +4,7 @@ final class RegistrationPresenter {
     
     private unowned var view: RegistrationViewInput
     private let interactor: RegistrationInteractorInput
-    private let router: RegistrationRouter
+    private let router: RegistrationRouterInput
     
     // MARK: Init
     
@@ -30,6 +30,7 @@ extension RegistrationPresenter: RegistrationViewOutput {
 
     func registrationButtonTapped(name: String) {
         interactor.saveData(name: name)
+        router.showStoreModule()
     }
     
     func regButton(
@@ -47,10 +48,6 @@ extension RegistrationPresenter: RegistrationViewOutput {
             repeatPassword: repeatPassword
         )
     }
-    
-    func showStoreModule() {
-        // router -> store screen
-    }
 }
 
 // MARK: - RegistrationInteractorOutput
@@ -62,7 +59,6 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
             view.set(.invalid([firstError]))
         } else {
             view.set(.valid)
-            showStoreModule()
         }
     }
     
@@ -83,8 +79,7 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
     
     func setSessionStatus(_ isRegistered: Bool) {
         if isRegistered {
-            // router -> store screen
-            print("router -> store screen")
+            router.showStoreModule()
         } else {
             view.set(.initial)
         }
